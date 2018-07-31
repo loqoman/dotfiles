@@ -1,6 +1,6 @@
 -------------------------------
---  "Zenburn" awesome theme  --
---    By Adrian C. (anrxc)   --
+--  "Imperium" awesome theme  --
+--    By Loqoman   --
 -------------------------------
 
 -- Alternative icon sets and widget icons:
@@ -12,14 +12,16 @@ theme.wallpaper = "/home/darwin/.config/awesome/imperum/imperum-background.jpeg"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+theme.font      = "georgia 8"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"
 theme.fg_focus   = "#F0DFAF"
 theme.fg_urgent  = "#CC9393"
-theme.bg_normal  = "#3F3F3F"
-theme.bg_focus   = "#1E2320"
+-- theme.bg_normal  = "#3F3F3F" This is the 'dark' Color. The color to show when the thing you want is not in focus.
+theme.bg_normal  = "#1B22E3"
+-- theme.bg_focus   = "#1E2320" This is the slightly brigher dark. Color to show when you have a thing selected
+theme.bg_focus   = "#6569DB"
 theme.bg_urgent  = "#3F3F3F"
 theme.bg_systray = theme.bg_normal
 -- }}}
