@@ -8,7 +8,7 @@ awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
-local net_widgets = require("net_widgets")
+-- local net_widgets = require("net_widgets")
 -- local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 -- Theme handling library
 local beautiful = require("beautiful")
