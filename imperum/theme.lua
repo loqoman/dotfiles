@@ -12,15 +12,16 @@ theme.wallpaper = "/home/darwin/.config/awesome/imperum/imperum-background.jpeg"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "georgia 9"
+theme.font      = "Monospace 8"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"
-theme.fg_focus   = "#F0DFAF"
+-- theme.fg_focus = "#F0DFAF" This is the color that the font + boxes changes to when you switch to it in the worksapce manager
+theme.fg_focus   = "#55FF55"
 theme.fg_urgent  = "#CC9393"
 -- theme.bg_normal  = "#3F3F3F" This is the 'dark' Color. The color to show when the thing you want is not in focus.
 theme.bg_normal  = "#000000"
--- theme.bg_focus   = "#1E2320" This is the slightly brigher dark. Color to show when you have a thing selected
+-- theme.bg_focus   = "#2B373B" This is the slightly brigher dark. Color to show when you have a thing selected
 theme.bg_focus   = "#2B373B"
 theme.bg_urgent  = "#3F3F3F"
 theme.bg_systray = theme.bg_normal
