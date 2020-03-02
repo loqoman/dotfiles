@@ -85,7 +85,10 @@ local themes = {
     "vertex",          -- 10
 }
 
-local chosen_theme = themes[5]
+-- 5 is working version
+-- Font in 10 is wanted
+-- powerarrowdark = themes[7]
+local chosen_theme = themes[7]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "gnome-terminal"
@@ -240,6 +243,11 @@ globalkeys = my_table.join(
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
     awful.key({ altkey }, "p", function() os.execute("screenshot") end,
               {description = "take a screenshot", group = "hotkeys"}),
+    -- Brightness Controll
+
+    awful.key({ }, "XF86MonBrightnessDown", function ()awful.util.spawn("xbacklight -dec 5") end),
+    awful.key({ }, "XF86MonBrightnessUp", function ()awful.util.spawn("xbacklight -inc 5") end),
+
 
     -- X screen locker
     awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
