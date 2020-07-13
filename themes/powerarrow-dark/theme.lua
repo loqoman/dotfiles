@@ -248,9 +248,12 @@ local net = lain.widget.net({
         widget:set_markup(markup.font(theme.font,
                           markup("#7AC82E", " " .. net_now.received)
                           .. " " ..
-                          markup("#46A8C3", " " .. net_now.sent .. " ")))
+                          markup("#46A8C3", " " .. net_now.sent .. " ")
+                          .. " " ..
+                          markup("#E2D736", " " .. ipaddr .. " ")))
     end
 })
+
 
 -- Separators
 local spr     = wibox.widget.textbox(' ')
@@ -325,7 +328,6 @@ function theme.at_screen_connect(s)
             temp.widget,
             arrl_ld,
             wibox.container.background(fsicon, theme.bg_focus),
-            --wibox.container.background(theme.fs.widget, theme.bg_focus),
             arrl_dl,
             baticon,
             bat.widget,
@@ -334,6 +336,7 @@ function theme.at_screen_connect(s)
             arrl_ld,
             wibox.container.background(neticon, theme.bg_focus),
             wibox.container.background(net.widget, theme.bg_focus),
+            --wibox.container.background(net_stat.widget, theme.bg_focus),
             arrl_dl,
             clock,
             spr,

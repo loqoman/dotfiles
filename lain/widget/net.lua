@@ -37,6 +37,9 @@ local function factory(args)
 
     if #net.iface == 0 then net.get_device() end
 
+    local handle = io.popen("hostname -I")
+    ipaddr = handle:read("*a") 
+
     function net.update()
         -- These are the totals over all specified interfaces
         net_now = {
