@@ -9,7 +9,7 @@
 local helpers = require("lain.helpers")
 local naughty = require("naughty")
 local wibox   = require("wibox")
-local string  = { format = string.format, match = string.match }
+local string  = { format = string.format, match = string.match, sub = string.sub }
 
 -- Network infos
 -- lain.widget.net
@@ -49,7 +49,8 @@ local function factory(args)
 
 
         local handle = io.popen("hostname -I")
-        ipaddr = handle:read("*a") 
+        ipaddr = string.sub(handle:read("*a"), 1, 14)
+        --ipaddr = iptemp, 1,14)
 
         for _, dev in ipairs(net.iface) do
             local dev_now    = {}
