@@ -17,4 +17,4 @@
 - TODO: Remove the 'mail' icon in the taskbar
 - TODO: Debug the 'HDD' icon / dependancy
 - TODO: Debug the 'music' feature
-
+- TODO: Support multiple monitor backgrounds with auto-detection
