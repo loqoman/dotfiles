@@ -242,6 +242,7 @@ theme.volume = lain.widget.alsa({
 })
 
 -- Net
+-- TODO: Will need a net_stats (IP + SSID) and a net_activity widget (Up + Down)
 local neticon = wibox.widget.imagebox(theme.widget_net)
 local net = lain.widget.net({
     settings = function()
