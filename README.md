@@ -6,6 +6,8 @@
 - A library used in the theme
 #### `themes` 
 - Folder containing all the themes
+#### kUbuntu Branch
+- A seperate branch is mainted for kUbuntu-specific changes. At the moment, these only consist of a different terminal name (`konsole` vs. `gnome-terminal`), but as enviroments diverge both versions need to be easily accessable. In the future, master may be renamed to a more descriptave name.
 
 
 ## Issue Tracking
