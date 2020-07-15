@@ -65,6 +65,9 @@ theme.widget_vol_no                             = theme.dir .. "/icons/vol_no.pn
 theme.widget_vol_mute                           = theme.dir .. "/icons/vol_mute.png"
 theme.widget_mail                               = theme.dir .. "/icons/mail.png"
 theme.widget_mail_on                            = theme.dir .. "/icons/mail_on.png"
+theme.widget_net_up                             = theme.dir .. "/icons/Up_arrow.png"
+theme.widget_net_down                           = theme.dir .. "/icons/down_arrow.png"
+
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
 theme.useless_gap                               = 0
@@ -86,6 +89,7 @@ theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
+
 
 local markup = lain.util.markup
 local separators = lain.util.separators
@@ -243,19 +247,28 @@ theme.volume = lain.widget.alsa({
 
 -- Net
 -- TODO: Will need a net_stats (IP + SSID) and a net_activity widget (Up + Down)
-local neticon = wibox.widget.imagebox(theme.widget_net)
-local net = lain.widget.net({
+local neticon       = wibox.widget.imagebox(theme.widget_net)
+local net_down_icon = wibox.widget.imagebox(theme.widget_net_down)
+local net_up_icon   = wibox.widget.imagebox(theme.widget_net_up)
+
+local net_up = lain.widget.net({
     settings = function()
-        widget:set_markup(markup.font(theme.font,
-                          markup("#7AC82E", " " .. net_now.received)
-                          .. " " ..
-                          markup("#46A8C3", " " .. net_now.sent .. " ")
-                          .. " " ..
-                          markup("#E2D736", " " .. ipaddr .. " ")))
+        widget:set_markup(markup.font(theme.font, markup("#46A8C3", " " .. net_now.sent)))       
     end
 })
 
+local net_down = lain.widget.net({
+    settings = function()
+        widget:set_markup(markup.font(theme.font, markup("#7AC82E", " " .. net_now.received)))
+    end
+})
 
+local net_stats =  lain.widget.net({
+    settings = function()
+        widget:set_markup(markup.font(theme.font,
+                          markup("#E2D736", " " .. ipaddr .. " ")))
+    end
+})
 -- Separators
 local spr     = wibox.widget.textbox(' ')
 local arrl_dl = separators.arrow_left(theme.bg_focus, "alpha")
@@ -333,11 +346,12 @@ function theme.at_screen_connect(s)
             baticon,
             bat.widget,
             arrl_ld,
-            arrl_dl,
-            arrl_ld,
             wibox.container.background(neticon, theme.bg_focus),
-            wibox.container.background(net.widget, theme.bg_focus),
-            --wibox.container.background(net_stat.widget, theme.bg_focus),
+            wibox.container.background(net_stats.widget, theme.bg_focus),
+            wibox.container.background(net_down_icon, theme.bg_focus),
+            wibox.container.background(net_down.widget, theme.bg_focus),
+            wibox.container.background(net_up_icon, theme.bg_focus),
+            wibox.container.background(net_up.widget, theme.bg_focus),
             arrl_dl,
             clock,
             spr,
