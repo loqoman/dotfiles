@@ -20,3 +20,9 @@
 - TODO: Debug the 'HDD' icon / dependancy
 - TODO: Debug the 'music' feature
 - TODO: Support multiple monitor backgrounds with auto-detection
+- TODO: Add SSID indetification in taskbar
+
+
+## Net layout
+---
+<start of section> <Wifi Symbol> <Ip address> <Signal Strength> <Down arrow> <net_down> <Up arrow> <net_up> 
