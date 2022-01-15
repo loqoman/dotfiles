@@ -75,7 +75,7 @@ awful.spawn.with_shell(
 
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "gnome-terminal"
+local terminal     = "konsole"
 local editor       = os.getenv("EDITOR") or "vim"
 local gui_editor   = "gvim"
 local browser      = "firefox"
@@ -241,9 +241,9 @@ globalkeys = my_table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description = "show help", group="awesome"}),
     -- Tag browsing
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+    awful.key({ modkey,           }, "a",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+    awful.key({ modkey,           }, "d",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
@@ -254,8 +254,8 @@ globalkeys = my_table.join(
     awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
               {description = "view  previous nonempty", group = "tag"}),
 
-    -- Default client focus
-    awful.key({ altkey,           }, "j",
+    -- Default client focus (Modified 2022.01.14 to include windows-style alt-tab)
+    awful.key({ altkey,           }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
         end,
@@ -733,3 +733,14 @@ client.connect_signal("property::maximized", border_adjust)
 client.connect_signal("focus", border_adjust)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+-- Autorun Programs
+autorun = true
+autorunApps = 
+{
+    "xcompmgr"
+}
+if autorun then 
+    for app = 1, #autorunApps do
+        awful.util.spawn(autorunApps[app])
+    end
+end
