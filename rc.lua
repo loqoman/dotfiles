@@ -248,19 +248,21 @@ globalkeys = my_table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
-    -- Non-empty tag browsing
-    awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-              {description = "view  previous nonempty", group = "tag"}),
-    awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-              {description = "view  previous nonempty", group = "tag"}),
+    -- Non-empty tag browsing (Disabled as this feature generally causes hotkey collisions with other programs)
+    --awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
+    --          {description = "view  previous nonempty", group = "tag"}),
+    --awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
+    --          {description = "view  previous nonempty", group = "tag"}),
 
-    -- Default client focus (Modified 2022.01.14 to include windows-style alt-tab)
+    -- Default client focus (Modified 2022.01.14 to include windows-style alt-tab)  
+    -- TODO: https://stackoverflow.com/questions/61629221/is-there-something-like-awful-client-focus-global-byidx
     awful.key({ altkey,           }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
         end,
-        {description = "focus next by index", group = "client"}
+         {description = "focus next by index", group = "client"}  
     ),
+    
     awful.key({ altkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
@@ -743,4 +745,22 @@ if autorun then
     for app = 1, #autorunApps do
         awful.util.spawn(autorunApps[app])
     end
+end
+
+function next_global(i, sel, stacked)
+  sel = sel or client.focus
+  if not sel then return end
+  local cls = awful.client.visible(nil, stacked)
+  local fcls = {}
+  for _, c in ipairs(cls) do
+    if awful.client.focus.filter(c) or c == sel then
+      table.insert(fcls, c)
+    end
+  end
+  cls = fcls
+  for idx, c in ipairs(cls) do
+    if c == sel then
+      return cls[gears.math.cycle(#cls, idx + i)]
+    end
+  end
 end
