@@ -48,8 +48,11 @@ local function factory(args)
         }
 
 
-        local handle = io.popen("hostname -I")
-        ipaddr = string.sub(handle:read("*a"), 1, 14)
+        local handle = io.popen("hostname -I") -- String the result of "hostname -I"
+        -- pos = string.find(handle:read("*a", " ") -- Get the position of the space in the string
+        -- ipaddr = string.sub(handle:read("*a"), 1, 14) -- Goal: Get everything before the first space
+        ipaddr = string.match(handle:read("*a"), "^[%p%w_-]*%w")  
+
         --ipaddr = iptemp, 1,14)
 
         for _, dev in ipairs(net.iface) do
@@ -72,7 +75,7 @@ local function factory(args)
 
             dev_now.last_t   = now_t
             dev_now.last_r   = now_r
-
+            -- Looks like the logic to do wifi versus ethernet converstion has already been written
             if wifi_state == "on" and helpers.first_line(string.format("/sys/class/net/%s/uevent", dev)) == "DEVTYPE=wlan" and string.match(dev_now.carrier, "1") then
                 dev_now.wifi   = true
                 dev_now.signal = tonumber(string.match(helpers.lines_from("/proc/net/wireless")[3], "(%-%d+%.)")) or nil
