@@ -51,7 +51,7 @@ local function factory(args)
         local handle = io.popen("hostname -I") -- String the result of "hostname -I"
         -- pos = string.find(handle:read("*a", " ") -- Get the position of the space in the string
         -- ipaddr = string.sub(handle:read("*a"), 1, 14) -- Goal: Get everything before the first space
-        ipaddr = string.match(handle:read("*a"), "^[%p%w_-]*%w")  
+        ipaddr = string.match(handle:read("*a"), "^[%p%w_-]*%w") -- https://stackoverflow.com/questions/70711067/nginx-lua-regex-match-first-word
 
         --ipaddr = iptemp, 1,14)
 

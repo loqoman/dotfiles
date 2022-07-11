@@ -80,7 +80,7 @@ local editor       = os.getenv("EDITOR") or "vim"
 local gui_editor   = "gvim"
 local browser      = "firefox"
 local guieditor    = "atom"
-local scrlocker    = "slock"
+local scrlocker    = "~/.config/awesome/lock.sh"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5", "6", "7", "8","9" }
