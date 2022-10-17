@@ -81,6 +81,8 @@ local gui_editor   = "gvim"
 local browser      = "firefox"
 local guieditor    = "atom"
 local scrlocker    = "~/.config/awesome/lock.sh"
+local runner       = "rofi -theme Monokai -show run -show-icons"
+local switcher     = "rofi -theme Monokai -show window -show-icons -kb-accept-entry '!Alt-Tab' -kb-row-down Alt-Tab"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5", "6", "7", "8","9" }
@@ -258,9 +260,9 @@ globalkeys = my_table.join(
     -- TODO: https://stackoverflow.com/questions/61629221/is-there-something-like-awful-client-focus-global-byidx
     awful.key({ altkey,           }, "Tab",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.spawn(switcher) 
         end,
-         {description = "focus next by index", group = "client"}  
+         {description = "Alt-tab behaivor", group = "client"}  
     ),
     
     awful.key({ altkey,           }, "k",
@@ -498,7 +500,8 @@ globalkeys = my_table.join(
         {description = "show dmenu", group = "launcher"})
     --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
+    -- awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
+    awful.key({ modkey }, "r", function () awful.spawn(runner) end,  
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -510,8 +513,27 @@ globalkeys = my_table.join(
                     history_path = awful.util.get_cache_dir() .. "/history_eval"
                   }
               end,
-              {description = "lua execute prompt", group = "awesome"})
-    --]]
+              {description = "lua execute prompt", group = "awesome"}),
+    --
+    -- Spotify control
+    awful.key({ modkey }, "Right", 
+        function ()
+            os.execute("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
+        end,
+        {description = "Spotify next playing"}),
+
+    awful.key({ modkey }, "Left",
+        function ()
+            os.execute("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
+        end,
+        {description = "Spotify previous"}),
+
+    awful.key({ modkey }, "Up",
+        function ()
+            os.execute("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
+        end,
+        {description = "Spotify Play/Pause"})
+
 )
 
 clientkeys = my_table.join(
