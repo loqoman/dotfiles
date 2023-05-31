@@ -270,7 +270,16 @@ globalkeys = my_table.join(
         end,
          {description = "Alt-tab behaivor", group = "client"}  
     ),
-    
+
+    -- Windows-Style screenshot, which saves to clipboard
+    awful.key({modkey,"Shift"}, "s",
+        function ()
+            awful.spawn("spectacle -r -b -c")
+        end,
+         {description = "Windows-Style screenshot", group = "client"}
+    ),
+
+
     awful.key({ altkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
