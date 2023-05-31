@@ -7,17 +7,18 @@ TEXT='#4c7899' # Purple Color
 WRONG='#880000bb'
 VERIFYING='#2a577a'
 
-i3lock \
---insidever-color=$CLEAR     \
+i3lock \  
+--fuzzy \ 
+#--insidever-color=$CLEAR     \
 --ringver-color=$VERIFYING   \
 \
---insidewrong-color=$CLEAR   \
---ringwrong-color=$WRONG     \
-\
---inside-color=$BLANK        \
---ring-color=$DEFAULT        \
---line-color=$BLANK          \
---separator-color=$DEFAULT   \
+#--insidewrong-color=$CLEAR   \
+#--ringwrong-color=$WRONG     \
+
+#--inside-color=$BLANK        \
+#--ring-color=$DEFAULT        \
+#--line-color=$BLANK          \
+#--separator-color=$DEFAULT   \
 \
 --verif-color=$TEXT          \
 --wrong-color=$TEXT          \
