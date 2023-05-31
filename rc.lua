@@ -59,16 +59,20 @@ end
 run_once({ "urxvtd", "unclutter -root" }) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
---[[
 awful.spawn.with_shell(
     'if (xrdb -query | grep --quiet "^awesome\\.started:\\s*true$"); then; exit; fi;' ..
     'xrdb -merge <<< "awesome.started:true";' ..
     -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
-    'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex
+    -- 'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex    
+    -- Organize the laptop monitor to be to the right of the external monitor
+    'xrandr --output DP-1.3 --mode 3840x2160 --set "scaling mode" "None" --pos 0x0 --rotate normal --rate 60 --dpi 144;' ..
+    'xrandr --output eDP-1-1 --mode 1920x1080 --set "scaling mode" "None" --pos 3840x0 --rotate normal --rate 60;' 
+    -- TODO: This is hardcoded to only work on DP1.3, and for the 4k monitor I'm using for school. Change if I move to a new home desk setup
 )
---]]
-
 -- }}}
+
+-- Trying
+awful.screen.set_auto_dpi_enabled(true)  
 
 -- {{{ Variable definitions
 
@@ -81,17 +85,19 @@ local gui_editor   = "gvim"
 local browser      = "firefox"
 local guieditor    = "atom"
 local scrlocker    = "~/.config/awesome/lock.sh"
-local runner       = "rofi -theme Monokai -show run -show-icons"
-local switcher     = "rofi -theme Monokai -show window -show-icons -kb-accept-entry '!Alt-Tab' -kb-row-down Alt-Tab"
+local runner       = "rofi -theme Monokai -show run -show-icons"  
+local switcher     = "rofi -theme Monokai -show-icons -show window -kb-cancel 'Alt+Escape,Escape' -kb-accept-entry '!Alt-Tab,Return' -kb-row-down 'Alt+Tab,Alt+Down' -kb-row-up 'Alt+ISO_Left_Tab,Alt+Up' && xdotool keyup Tab && xdotool keydown Tab"  
+
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5", "6", "7", "8","9" }
+-- Default layouts for the first n tags
 awful.layout.layouts = {
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
+    -- awful.layout.suit.tile,
+    -- awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
@@ -369,8 +375,8 @@ globalkeys = my_table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
+    --awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+    --          {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
